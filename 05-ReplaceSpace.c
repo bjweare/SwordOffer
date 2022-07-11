@@ -2,6 +2,11 @@
 #include <stdlib.h>
 #include <string.h>
 
+/*
+   剑指 Offer 05. 替换空格
+   https://leetcode.cn/problems/ti-huan-kong-ge-lcof/
+ */
+
 char* replaceSpace(char* s) {
     if (!s) {
         return NULL;

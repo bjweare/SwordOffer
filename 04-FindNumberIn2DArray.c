@@ -1,6 +1,11 @@
 #include <stdio.h>
 #include <stdbool.h>
 
+/*
+   剑指 Offer 04. 二维数组中的查找
+   https://leetcode.cn/problems/er-wei-shu-zu-zhong-de-cha-zhao-lcof/
+ */
+
 bool findNumberIn2DArray(int **matrix, int matrixSize, int *matrixColSize, int target) {
     if (!matrixColSize) {
         return false;

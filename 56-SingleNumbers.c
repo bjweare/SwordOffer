@@ -2,15 +2,24 @@
 #include <stdlib.h>
 #include <string.h>
 
+/*
+   剑指 Offer 56 - I. 数组中数字出现的次数
+   https://leetcode.cn/problems/shu-zu-zhong-shu-zi-chu-xian-de-ci-shu-lcof/
+ */
 int *singleNumbers(int *nums, int numsSize, int *returnSize) {
+    *returnSize = 0;
+    if (!nums || numsSize == 0) {
+        return NULL;
+    }
+
     int xor = 0;
     for (int i = 0; i < numsSize; i++) {
         xor ^= nums[i];
     }
 
-    int bitMask = 1;
+    uint32_t bitMask = 0;
     for (int i = 0; i < 32; i++) {
-        bitMask = bitMask << i;
+        bitMask = 1 << i;
         if (bitMask & xor) {
             break;
         }
@@ -41,6 +50,7 @@ int *singleNumbers(int *nums, int numsSize, int *returnSize) {
     if (!newNums) {
         return NULL;
     }
+    memset(newNums, 0x00, 2*sizeof(int));
     for (int i = 0; i < size1; i++) {
         newNums[0] ^= newArray[i];
     }
@@ -49,15 +59,15 @@ int *singleNumbers(int *nums, int numsSize, int *returnSize) {
         newNums[1] ^= newArray[i];
     }
 
-    *returnSize = 2;
     free(newArray);
     newArray = NULL;
 
+    *returnSize = 2;
     return newNums;
 }
 
 int main(void) {
-    int array[] = {2, 2, 3, 3, 1, 4};
+    int array[] = {6, 4, 1, 4};
 
     int newNumsSize = 0;
     int *newNums = singleNumbers(array, sizeof(array) / sizeof(int), &newNumsSize);

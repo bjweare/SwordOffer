@@ -2,12 +2,19 @@
 #include <stdlib.h>
 #include <string.h>
 
+/*
+   剑指 Offer 06. 从尾到头打印链表
+   https://leetcode.cn/problems/cong-wei-dao-tou-da-yin-lian-biao-lcof/
+ */
+
 struct ListNode {
     int val;
     struct ListNode *next;
 };
 
 int *reversePrint(struct ListNode *head, int *returnSize) {
+    *returnSize = 0;
+
     if (!head) {
         return NULL;
     }
