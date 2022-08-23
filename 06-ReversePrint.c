@@ -4,8 +4,8 @@
 
 /*
    剑指 Offer 06. 从尾到头打印链表
-   https://leetcode.cn/problems/cong-wei-dao-tou-da-yin-lian-biao-lcof/
- */
+https://leetcode.cn/problems/cong-wei-dao-tou-da-yin-lian-biao-lcof/
+*/
 
 struct ListNode {
     int val;
@@ -19,23 +19,26 @@ int *reversePrint(struct ListNode *head, int *returnSize) {
         return NULL;
     }
 
-    int size = 0;
-    int *array = reversePrint(head->next, &size);
+    struct ListNode *p = head;
+    int listSize = 0;
+    while (NULL != p) {
+        listSize++;
+        p = p->next;
+    }
 
-    int newSize = size + 1;
-    int *newArray = (int *)malloc(newSize * sizeof(int));
+    int *newArray = (int *)malloc(listSize * sizeof(int));
     if (!newArray) {
         return NULL;
     }
-    memset(newArray, 0x00, newSize*sizeof(int));
+    memset(newArray, 0x00, listSize*sizeof(int));
 
-    newArray[size] = head->val;
-    if (array) {
-        memcpy(newArray, array, size*sizeof(int));
-        free(array);
-        array = NULL;
+    int idx = listSize;
+    p = head;
+    while (NULL != p) {
+        newArray[--idx] = p->val;
+        p = p->next;
     }
-    *returnSize = newSize;
+    *returnSize = listSize;
 
     return newArray;
 }

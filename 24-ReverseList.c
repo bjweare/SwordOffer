@@ -4,8 +4,8 @@
 
 /*
    剑指 Offer 24. 反转链表
-   https://leetcode.cn/problems/fan-zhuan-lian-biao-lcof/
- */
+https://leetcode.cn/problems/fan-zhuan-lian-biao-lcof/
+*/
 
 struct ListNode {
     int val;
@@ -17,19 +17,14 @@ struct ListNode *reverseList(struct ListNode *head) {
         return NULL;
     }
 
-    struct ListNode *last = head;
-    struct ListNode *rHead = reverseList(head->next);
-    if (NULL == rHead) {
-        return head;
+    struct ListNode *prev = NULL, *cur = head;
+    while (NULL != cur) {
+        struct ListNode *next = cur->next;
+        cur->next = prev;
+        prev = cur;
+        cur = next;
     }
-    last->next = NULL;
-    struct ListNode *tail = rHead;
-    while (tail->next) {
-        tail = tail->next;
-    }
-    tail->next = last;
-
-    return rHead;
+    return prev;
 }
 
 struct ListNode *createLinkedList(int size) {
